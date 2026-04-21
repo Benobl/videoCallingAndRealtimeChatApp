@@ -47,8 +47,6 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   },
 );
-const User = mongoose.model("User", userSchema);
-//pre hook or password hashing
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   try {
@@ -59,4 +57,7 @@ userSchema.pre("save", async function (next) {
     next(error);
   }
 });
+const User = mongoose.model("User", userSchema);
+//pre hook or password hashing
+
 export default User;
